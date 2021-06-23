@@ -1,0 +1,53 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Mini Lightbox</title>
+        <meta name="description" content="Prosty lightbox do wyswietlania zdjec w wiekszym rozmiarze, bez uzycia jQuery, bardzo lekki">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="{% static 'portfolio/css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'portfolio/css/lightbox.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/cabecera.css' %}">
+        <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    </head>
+    <body>
+        {% include 'cabecera.html' %}
+        <header id="galeria">
+            <h1 id="galeria">
+                Imagenes
+            </h1>
+        </header>
+        <main id="galeria">
+            <section id="galeria">
+                <h2 id="galeria">
+                    Fotos
+                </h2>
+
+                {% block content %}
+                <ul id="galeria">
+                {% for x in portfolio %}
+                    <li id="galeria">
+                        <a id="galeria" class="link-photo" data-lightbox="img" href="{{ x.image.url }}" title="{{x.titulo}}">
+                            <img id="galeria" height= "150px" src="{{ x.image.url }}" alt="{{ x.titulo }}">
+                        </a>
+                    </li>
+                {% endfor %}   
+                </ul>
+                {% endblock %}
+
+            </section>
+        </main>
+
+        <script src="{% static 'portfolio/js/lightbox.min.j'%}"></script>
+        <script>
+            const lb = lightbox();
+        </script>
+
+    <footer>
+        {% include 'footer.html' %}
+    </footer>
+
+       
+    </body>
+</html>

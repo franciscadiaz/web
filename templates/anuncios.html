@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+  <link rel='stylesheet' href="{% static 'css/cabecera.css' %}">
+  <link rel='stylesheet' href="{% static 'css/footer.css' %}">
+  <link rel='stylesheet' href="{% static 'css/base.css' %}">
+    
+  <title>Mi Web en Django</title>
+  <style>
+ 
+  </style>
+
+</head>
+<body>
+  <!-- AQUI VA LA CABECERA -->
+  {% include 'cabecera.html' %}
+  <!-- FIN CABECERA -->
+    <!-- AQUI VA EL CONTENIDO -->
+  <div id="contenedor">
+    <div id="content">
+      <h1>LISTA DE CUENTOS</h1>
+      {% block content %}
+      <div  class="anuncio">
+        {% for anuncio in anuncios %}
+        <div class="individual">
+          <h2>{{ anuncio.titulo }}</h2>
+          <p>
+            <img src="{{ anuncio.imagen.url }}"  alt="{{anuncio.titulo}}">
+            <span class="datos">{{ anuncio.created }}  {{ anuncio.autor }}</span>
+            {{ anuncio.texto| truncatewords:90|linebreaks }}
+          </p>
+          <p>LEER MÁS...</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% endblock %}
+    </div>
+
+  </div>
+  <!-- FIN CONTENIDO -->
+  <!-- AQUI EMPIEZA EL PIE DE PAGINA -->
+{% include 'footer.html' %}  
+  <!-- AQUI TERMINA EL FOOTER -->
+</body>
+</html>

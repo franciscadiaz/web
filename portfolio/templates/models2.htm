@@ -1,0 +1,24 @@
+class Album(models.Model):
+    nombre = models.Charfield(max_lenght=150. verbose_name="Album")
+    created = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        ordering = ("nombre", )
+        def __str__(self):
+            return self.nombre
+
+class Image(model.Models):
+    STATUS_CHOICE = (
+        ("activa", "Activa"),
+        ("inactiva", "Inactiva"),
+    )
+    owner = models.ForeignKey(Album, on_delete= models.CASCADE, verbose_name="Album")
+    id = models.AutoField(null=False, primary_key = True, unique = True)
+    image = models.ImageField(upload_to="portfolio")
+    nombre = models.Charfield(max_length=100)
+    estado = models.CharField(max_lenght=10,
+                            choices=STATUS_CHOICE,
+                            default="inactiva")
+    class Meta:
+        ordering =("id",)
+    def __str__(self):
+        return self.nombre
